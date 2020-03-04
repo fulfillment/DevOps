@@ -1,5 +1,7 @@
 # AWS Elasticbeanstalk Single Instance
 
+All `.config.yaml` files should be renamed to `.config` and placed in the `.ebextensions` folder.
+
 ## Public Networks
 
 More Soon
@@ -8,7 +10,7 @@ More Soon
 
 Note: A common theme will be to have an ENV var `APP_DOMAIN` & `APP_ENV`
 
-## Update Route 53 DNS
+### Update Route 53 DNS
 
 AWS is quirky when it comes to assigning an IP to the Environment URL (x-environment-x.x-app-x.us-east-1.elasticbeanstalk.com)
 
@@ -19,7 +21,7 @@ AWS is quirky when it comes to assigning an IP to the Environment URL (x-environ
 
 So let's assign the IPv4 internal address of the EC2 to the domain of `APP_DOMAIN`. You will need to get the Route 53 Hosted Zone ID and edit line 8.
 
-[99-dns.config](99-dns.config)
+[99-dns.config](99-dns.config.yaml)
 
 What we are doing:
 
