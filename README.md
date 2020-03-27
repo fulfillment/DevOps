@@ -1,7 +1,7 @@
 # Fulfillment.com DevOps
 
 - AWS
-  - [Elasticbeanstalk](fulfillment/DevOps/tree/master/Elasticbeanstalk)
+  - [Elasticbeanstalk](tree/master/Elasticbeanstalk)
 
 ## Notes
 
