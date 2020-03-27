@@ -7,7 +7,7 @@
 
 ### Semantic Versioning
 
-Packages published internaly and externally must conform to Semantic Versioning.
+Packages published internally and externally must conform to Semantic Versioning.
 
 * [About](https://semver.org/)
 * [Semver Check](https://jubianchi.github.io/semver-check/#/)
