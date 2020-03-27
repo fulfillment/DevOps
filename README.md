@@ -1,5 +1,3 @@
 # Fulfillment.com AWS DevOps
 
-## Elasticbeanstalk
-
-* [Single Instance](Elasticbeanstalk/Single-Instance/)
+* [Elasticbeanstalk](https://github.com/fulfillment/DevOps/tree/master/Elasticbeanstalk)

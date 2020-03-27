@@ -3,17 +3,17 @@
 All `.config.yaml` files should be renamed to `.config` and placed in the `.ebextensions` folder.
 
 - [LB & Single Instance](#lb--single-instance)
-	- [Custom Logging & Log Rotation](#custom-logging--log-rotation)
+  - [Custom Logging & Log Rotation](#custom-logging--log-rotation)
 - [Single Instance](#single-instance)
-	- [Public Networks](#public-networks)
-	- [Private Networks](#private-networks)
-		- [Update Route 53 DNS](#update-route-53-dns)
+  - [Public Networks](#public-networks)
+  - [Private Networks](#private-networks)
+    - [Update Route 53 DNS](#update-route-53-dns)
 
 ## LB & Single Instance
 
 ### Custom Logging & Log Rotation
 
-[All/05-logging.config.yaml](05-logging.config.yaml)
+[05-logging.config.yaml](https://github.com/fulfillment/DevOps/blob/master/Elasticbeanstalk/All/05-logging.config.yaml)
 
 In this example we are logging from node.js, these logs can grow large so periodically we want to rotate and compress them out.
 
