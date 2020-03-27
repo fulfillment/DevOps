@@ -1,16 +1,51 @@
-# AWS Elasticbeanstalk Single Instance
+# AWS Elasticbeanstalk <!-- omit in toc -->
 
 All `.config.yaml` files should be renamed to `.config` and placed in the `.ebextensions` folder.
 
-## Public Networks
+- [LB & Single Instance](#lb--single-instance)
+	- [Custom Logging & Log Rotation](#custom-logging--log-rotation)
+- [Single Instance](#single-instance)
+	- [Public Networks](#public-networks)
+	- [Private Networks](#private-networks)
+		- [Update Route 53 DNS](#update-route-53-dns)
+
+## LB & Single Instance
+
+### Custom Logging & Log Rotation
+
+[All/05-logging.config.yaml](05-logging.config.yaml)
+
+In this example we are logging from node.js, these logs can grow large so periodically we want to rotate and compress them out.
+
+Details are provided in the `.config` file.
+
+References:
+* https://aws-labs.com/understanding-logrotate-utility/
+* https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.logging.html#health-logs-logrotate
+
+Example:
+
+```js
+let log = function(entry) {
+    try {
+        fs.appendFileSync('/tmp/appLogs/app.log', new Date().toISOString() + ' - ' + entry + '\n')
+    } catch (e) {
+        console.log('Cannot write to log', e)
+    }
+}
+```
+
+## Single Instance
+
+### Public Networks
 
 More Soon
 
-## Private Networks
+### Private Networks
 
 Note: A common theme will be to have an ENV var `APP_DOMAIN` & `APP_ENV`
 
-### Update Route 53 DNS
+#### Update Route 53 DNS
 
 AWS is quirky when it comes to assigning an IP to the Environment URL (x-environment-x.x-app-x.us-east-1.elasticbeanstalk.com)
 
@@ -21,7 +56,7 @@ AWS is quirky when it comes to assigning an IP to the Environment URL (x-environ
 
 So let's assign the IPv4 internal address of the EC2 to the domain of `APP_DOMAIN`. You will need to get the Route 53 Hosted Zone ID and edit line 8.
 
-[99-dns.config](99-dns.config.yaml)
+[Single-Instance/99-dns.config](99-dns.config.yaml)
 
 What we are doing:
 

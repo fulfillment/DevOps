@@ -1,0 +1,74 @@
+files:
+  # Will include our log when requesting "Last 100 Lines"
+  "/opt/elasticbeanstalk/tasks/taillogs.d/applogs.conf":
+    mode: "000644"
+    owner: root
+    group: root
+    content: |
+      /var/log/applogs/*.log
+  # Will include logs when requesting "Full Logs"
+  "/opt/elasticbeanstalk/tasks/bundlelogs.d/applogs.conf":
+    mode: "000644"
+    owner: root
+    group: root
+    content: |
+      /var/log/applogs/*.log
+      /var/log/applogs/rotated/*
+  # Will publish logs to S3 after they are rotated
+  "/opt/elasticbeanstalk/tasks/publishlogs.d/applogs.conf":
+    mode: "000644"
+    owner: root
+    group: root
+    content: |
+      /var/log/applogs/rotated/*
+  # Settings for when running the next command
+  "/etc/logrotate.elasticbeanstalk.hourly/applogs.conf":
+    mode: "000644"
+    owner: root
+    group: root
+    content: |
+      /var/log/applogs/*.log {
+      size 50M
+      rotate 90
+      compress
+      notifempty
+      copytruncate
+      dateext
+      dateformat %s
+      olddir /var/log/applogs/rotated
+      }
+  # Frequency and reference to above settings, choose hourly or daily
+  "/etc/cron.hourly/cron.logrotate.applogs.conf":
+    mode: "000755"
+    owner: root
+    group: root
+    content: |
+      #!/bin/sh
+      test -x /usr/sbin/logrotate || exit 0
+      /usr/sbin/logrotate /etc/logrotate.elasticbeanstalk.hourly/applogs.conf
+
+# Create folders for logs and rotated logs
+# Permissions to allow node.js to write to logs
+container_commands:
+  01_mkdir_log:
+    test: test ! -d /var/log/applogs/
+    command: |
+      if [ ! -d /var/log/applogs/ ]; then
+        sudo mkdir /var/log/applogs/
+      fi
+  02_mkdir_log_rotated:
+    test: test ! -d /var/log/applogs/rotated
+    command: |
+      if [ ! -d /var/log/applogs/rotated ]; then
+        sudo mkdir /var/log/applogs/rotated
+      fi
+  03_touch_log:
+    test: test ! -f /var/log/applogs/app.log
+    command: |
+      if [ ! -f /var/log/applogs/app.log ]; then
+        touch /var/log/applogs/app.log
+      fi
+  04_permissions:
+    command: |
+      sudo chown -R nodejs /var/log/applogs/
+      sudo chgrp nodejs /var/log/applogs/app.log
