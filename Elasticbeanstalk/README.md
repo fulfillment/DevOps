@@ -13,7 +13,7 @@ All `.config.yaml` files should be renamed to `.config` and placed in the `.ebex
 
 ### Custom Logging & Log Rotation
 
-[05-logging-nodejs.config](/DevOps/blob/master/Elasticbeanstalk/All/05-logging-nodejs.config.yaml)
+[05-logging-nodejs.config](https://github.com/fulfillment/DevOps/blob/master/Elasticbeanstalk/All/05-logging-nodejs.config.yaml)
 
 In this example we are logging from node.js, these logs can grow large so periodically we want to rotate and compress them out.
 
@@ -68,7 +68,7 @@ AWS is quirky when it comes to assigning an IP to the Environment URL (x-environ
 
 So let's assign the IPv4 internal address of the EC2 to the domain of `APP_DOMAIN`. You will need to get the Route 53 Hosted Zone ID and edit line 8.
 
-[99-dns.config](/fulfillment/DevOps/blob/master/Elasticbeanstalk/Single-Instance/99-dns.config.yaml)
+[99-dns.config](https://github.com/fulfillment/DevOps/blob/master/Elasticbeanstalk/Single-Instance/99-dns.config.yaml)
 
 What we are doing:
 
