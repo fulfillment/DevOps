@@ -13,7 +13,7 @@ All `.config.yaml` files should be renamed to `.config` and placed in the `.ebex
 
 ### Custom Logging & Log Rotation
 
-[05-logging.config.yaml](https://github.com/fulfillment/DevOps/blob/master/Elasticbeanstalk/All/05-logging.config.yaml)
+[05-logging-nodejs.config.yaml](DevOps/blob/master/Elasticbeanstalk/All/05-logging-nodejs.config.yaml)
 
 In this example we are logging from node.js, these logs can grow large so periodically we want to rotate and compress them out.
 
@@ -26,6 +26,18 @@ References:
 Example:
 
 ```js
+let log = function(entry) {
+    entry = new Date().toISOString() + ' - ' + entry + '\n'
+
+    fs.appendFile('/var/log/applogs/app.log', entry, (err) => {
+        if (err) {
+            console.log('Cannot write to log', err)
+        }
+    })
+}
+
+// -- OR --
+
 let log = function(entry) {
     try {
         fs.appendFileSync('/tmp/appLogs/app.log', new Date().toISOString() + ' - ' + entry + '\n')
