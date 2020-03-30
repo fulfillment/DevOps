@@ -40,7 +40,7 @@ let log = function(entry) {
 
 let log = function(entry) {
     try {
-        fs.appendFileSync('/tmp/appLogs/app.log', new Date().toISOString() + ' - ' + entry + '\n')
+        fs.appendFileSync('/var/log/applogs/app.log', new Date().toISOString() + ' - ' + entry + '\n')
     } catch (e) {
         console.log('Cannot write to log', e)
     }

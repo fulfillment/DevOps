@@ -3,7 +3,7 @@ commands:
     command: |
         IP=$(curl --silent http://169.254.169.254/latest/meta-data/local-ipv4)
         APP_DOMAIN=$(/opt/elasticbeanstalk/bin/get-config environment -k APP_DOMAIN)
-        echo "{\"Comment\":\"Update Queue IP\",\"Changes\":[{\"Action\": \"UPSERT\",\"ResourceRecordSet\":{\"SetIdentifier\":\"Action 1\",\"Name\":\""$APP_DOMAIN".\",\"Type\":\"A\",\"Region\":\"us-east-1\",\"TTL\":60,\"ResourceRecords\":[{\"Value\":\""$IP"\"}]}}]}" > awsr53.json
+        echo "{\"Comment\":\"Update IP\",\"Changes\":[{\"Action\": \"UPSERT\",\"ResourceRecordSet\":{\"SetIdentifier\":\"Action 1\",\"Name\":\""$APP_DOMAIN".\",\"Type\":\"A\",\"Region\":\"us-east-1\",\"TTL\":60,\"ResourceRecords\":[{\"Value\":\""$IP"\"}]}}]}" > awsr53.json
         aws route53 change-resource-record-sets \
             --hosted-zone-id ***ZONE_ID*** \
             --change-batch file://awsr53.json
