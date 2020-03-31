@@ -4,6 +4,7 @@ All `.config.yaml` files should be renamed to `.config` and placed in the `.ebex
 
 - [LB & Single Instance](#lb--single-instance)
   - [Custom Logging & Log Rotation](#custom-logging--log-rotation)
+  - [Adding Instance(s) to a Target Group](#adding-instances-to-a-target-group)
 - [Single Instance](#single-instance)
   - [Public Networks](#public-networks)
   - [Private Networks](#private-networks)
@@ -46,6 +47,12 @@ let log = function(entry) {
     }
 }
 ```
+
+### Adding Instance(s) to a Target Group
+
+Adds a new or replacement instance to a target group for your application load balancer. Note: a terminated instance will automatically be removed.
+
+[90-target-group.config.yaml](https://github.com/fulfillment/DevOps/blob/master/Elasticbeanstalk/All/90-target-group.config.yaml)
 
 ## Single Instance
 

@@ -1,0 +1,9 @@
+commands:
+  01_update_alb_target_group:
+    command: |
+        INSTANCE=$(curl --silent http://169.254.169.254/latest/meta-data/instance-id)
+        aws elbv2 register-targets \
+            --region us-east-1 \
+            --target-group-arn arn:aws:elasticloadbalancing:us-east-1:***ACCOUNT_ID***:targetgroup/***NAME***/***ID*** \
+            --targets Id="$INSTANCE"
+        echo "Added $INSTANCE to ***NAME*** Target Group"
